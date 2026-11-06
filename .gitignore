@@ -1,0 +1,40 @@
+# Dependencias y build
+node_modules/
+dist/
+build/
+.next/
+target/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Secretos — NUNCA deben llegar al repo
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Logs y temporales
+*.log
+*.tmp
+.cache/
+tmp/
+
+# Datos locales de desarrollo — la demo usa datos sembrados, versionados
+*.sqlite3
+*.db
