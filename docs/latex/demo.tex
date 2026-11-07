@@ -1,0 +1,134 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\geometry{margin=2cm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Demo Script — Quantum Testing Agent}
+\lhead{\thepage}
+
+\title{\textbf{Guion de demo}\\
+\large Quantum Testing Agent — Vultr: Agent Rush Hackathon}
+\author{Jesús León Porras}
+\date{8 de noviembre de 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Guion de demostración para el proyecto Quantum Testing Agent, participante en el
+desafío Blast Radius Zero del hackathon Vultr: Agent Rush. Duración máxima: 5
+minutos. Incluye un momento de contención obligatorio donde el sandbox absorbe
+código hostil sin comprometer el host ni el backend.
+\end{abstract}
+
+\section{Objetivo de la demo}
+
+Demostrar un agente web que prueba circuitos cuánticos de forma aislada y
+verificable en Vultr. La demo debe mostrar:
+\begin{enumerate}
+    \item Planificación del agente (LLM de Vultr Serverless Inference).
+    \item Generación de código en el framework elegido.
+    \item Ejecución en sandbox Docker aislado con límites.
+    \item Resultado verificable (estados, histogramas, logs).
+    \item \textbf{Momento de contención:} sandbox absorbe código hostil y se destruye.
+    \item Compatibilidad multi-framework.
+\end{enumerate}
+
+\section{Guion paso a paso}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{clp{6cm}c}
+\toprule
+\# & Paso & Qué se muestra & Tiempo \\
+\midrule
+1 & Apertura & Problema: probar código cuántico es riesgoso; solución: sandbox aislado & 30 s \\
+2 & Entrada & Usuario escribe circuito de 3 qubits + Hadamard + CNOT en Qiskit & 30 s \\
+3 & Planificación & Agente descompone en pasos, muestra plan en pantalla & 30 s \\
+4 & Generación & Código Qiskit generado, mostrado brevemente & 20 s \\
+5 & Ejecución & Contenedor Docker levantado con límites, código ejecutado & 45 s \\
+6 & Resultado & Estados de medida y histogramas verificables & 30 s \\
+7 & Contención & Código hostil (bucle infinito) $\rightarrow$ sandbox lo absorbe y destruye & 60 s \\
+8 & Multi-framework & Selección de PennyLane/Cirq, prueba repetida & 30 s \\
+9 & Cierre & Resumen de arquitectura + llamada a acción & 45 s \\
+\bottomrule
+\end{tabular}
+\caption{Guion de demo ($\approx$ 4 min 30 s)}
+\end{table}
+
+\section{Momento de contención (clave para el vídeo)}
+
+\begin{itemize}
+    \item \textbf{Entrada hostil:} código con \texttt{while True: pass} o
+    \texttt{os.system("rm -rf /tmp/test")}.
+    \item \textbf{Comportamiento esperado:} el contenedor alcanza el límite de
+    tiempo/memoria, Docker lo mata, el entorno se destruye, la API responde con
+    \texttt{containment: true}.
+    \item \textbf{Evidencia en vídeo:} terminal del backend registrando la
+    destrucción del contenedor + web mostrando estado seguro.
+\end{itemize}
+
+\section{Requisitos técnicos para la demo}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Requisito} & \textbf{Detalle} \\
+\midrule
+Backend desplegado & VM de Vultr con FastAPI + Docker, URL pública \\
+LLM & Vultr Serverless Inference \\
+Frameworks en Docker & Qiskit, PennyLane (Cirq, Azure opcionales) \\
+Límites de sandbox & 60 s CPU, 512 MB memoria, red desactivada \\
+Repo público & GitHub con README, setup, docs, guion de demo \\
+Vídeo & $\leq$ 5 min, MP4, $\leq$ 300 MB, con contención \\
+\bottomrule
+\end{tabular}
+\caption{Requisitos técnicos}
+\end{table}
+
+\section{Guion de voz (sugerido)}
+
+\begin{quote}
+``Hola, soy el agente de pruebas cuánticas. Este es un circuito de 3 qubits con
+Hadamard y CNOT. Lo voy a ejecutar de forma aislada en un sandbox de Docker en
+Vultr. El agente planificó la prueba, generó el código en Qiskit y lo ejecutó
+dentro del contenedor. Aquí está el resultado verificable: estados de medida y
+histogramas.
+
+Ahora voy a probar algo peligroso: un bucle infinito embebido en el circuito.
+Observen: el sandbox lo detecta, alcanza el límite de tiempo, destruye el
+contenedor y el sistema sigue intacto. Eso es contención.
+
+Todo corre en una VM de Vultr, con llamadas LLM a Vultr Serverless Inference, sin
+GPUs de Vultr, usando simulador CPU y backends remotos opcionales de IBM, AWS y
+Azure.''
+\end{quote}
+
+\section{Checklist pre-demo}
+
+\begin{itemize}
+    \item[$\square$] Backend desplegado en VM de Vultr con URL pública accesible.
+    \item[$\square$] \texttt{.env} configurado con \texttt{VULTR\_API\_KEY}.
+    \item[$\square$] Docker disponible en la VM.
+    \item[$\square$] Imagen \texttt{python:3.11-slim} con Qiskit y PennyLane instalados.
+    \item[$\square$] Prueba manual de un circuito simple completada con éxito.
+    \item[$\square$] Prueba de contención realizada y registrada.
+    \item[$\square$] Repo GitHub público con README y documentación.
+    \item[$\square$] Vídeo grabado ($\leq$ 5 min, MP4, $\leq$ 300 MB).
+    \item[$\square$] Envío realizado en lablab.ai antes del 8 de noviembre.
+\end{itemize}
+
+\end{document}
