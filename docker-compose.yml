@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  quantum-agent:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - VULTR_API_KEY=${VULTR_API_KEY}
+      - VULTR_INFERENCE_URL=${VULTR_INFERENCE_URL}
+      - VULTR_INFERENCE_MODEL=${VULTR_INFERENCE_MODEL}
+      - SANDBOX_TIMEOUT_SECONDS=${SANDBOX_TIMEOUT_SECONDS:-60}
+      - SANDBOX_MEMORY_LIMIT=${SANDBOX_MEMORY_LIMIT:-512m}
+      - SANDBOX_CPU_LIMIT=${SANDBOX_CPU_LIMIT:-1.0}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - quantum-net
+
+networks:
+  quantum-net:
+    driver: bridge

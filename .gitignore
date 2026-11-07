@@ -1,40 +1,50 @@
-# Dependencias y build
-node_modules/
-dist/
-build/
-.next/
-target/
-*.tsbuildinfo
-
 # Python
 __pycache__/
 *.py[cod]
-.venv/
-venv/
-.pytest_cache/
-.ruff_cache/
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+pip-log.txt
+pip-delete-this-directory.txt
 *.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Secretos — NUNCA deben llegar al repo
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-secrets/
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
 
-# Sistema y editores
-.DS_Store
-Thumbs.db
+# IDE
+.vscode/
 .idea/
 *.swp
+*.swo
+*~
 
-# Logs y temporales
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Logs
 *.log
-*.tmp
-.cache/
-tmp/
+logs/
 
-# Datos locales de desarrollo — la demo usa datos sembrados, versionados
-*.sqlite3
-*.db
+# Docker
+.dockerignore
